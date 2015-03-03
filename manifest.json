@@ -1,0 +1,19 @@
+{
+
+    "manifest_version": 2,
+
+        "name": "burndown",
+        "description": "This extension shows a Google Image search result for the current page",
+        "version": "1.0",
+
+        "browser_action": {
+        },
+        "permissions": [
+            "activeTab",
+            "storage"
+            ],
+        "chrome_url_overrides":{
+            "newtab":"counter.html"
+        }
+
+}
