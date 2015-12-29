@@ -2,23 +2,18 @@
 <html>
     <head>
     <title>Burnout</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
     <link href="app/css/app.css" rel="stylesheet"/>
 </head>
 <body>
     <div class='b-wrapper'>
-        <div class='b-row b-center ptop b-emphasis-30'>
-            <div class='b-col-4'></div>
-            <div class='b-col-4'>
-                <div class='b-col-4 b-hours'>00</div>
-                <div class='b-col-4 b-minutes'>00</div>
-                <div class='b-col-4 b-seconds'>00</div>
-            </div>
-            <div class='b-col-4'></div>
-        </div>
-        <div class='b-row b-center'>
+        <div id="react-mount-point"/></div>
+        <div class='row b-center'>
             <svg><circlei cx="50" cy="50" r="40" stroke="black" stroke-width="1" fill="red" ></circle></svg>
         </div>
+    </div>
     </body>
-    <script type='text/javascript' src='app/lib.js'></script>
-    <script type='text/javascript' src='app/init.js'></script>
+    <!--<script type='text/javascript' src='app/lib.js'></script>-->
+    <script type='text/javascript' src='bundle.js'></script>
 </html>
