@@ -6,22 +6,21 @@ export const ADD_TODO = 'ADD_TODO'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 export const UPDATE_TIME = 'UPDATE_TIME'
-export const UPDATE_BEDTIME = 'UPDATE_BEDTIME'
 
+export const UPDATE_BEDTIME = 'UPDATE_BEDTIME'
+export const UPDATE_BGCOLOR = 'UPDATE_BGCOLOR'
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
 /*
  * other constants
  */
 
-export const DEFAULT_TIME = {
-	hours : '00',
-	minutes : '00',
-	seconds : '00'
-}
+export const DEFAULT_TIME = new Date()
 
-export const DEFAULT_BEDTIME = {
-  hours : '23',
-  minutes : '30',
-  seconds : '00'
+export const COLORS  = ['#AA3939','#003259','#113939']
+
+export const DEFAULT_SETTINGS = {
+  bedTime : '23:00:00',
+  bgColor : '#AA3939'
 }
 
 export const VisibilityFilters = {
@@ -51,6 +50,9 @@ export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
 }
 
+export function updateSettings(settings){
+  return {type : UPDATE_SETTINGS, settings}
+}
 
 export function updateTime(time){
 	return {type: UPDATE_TIME, time}

@@ -1,23 +1,31 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, UPDATE_TIME, UPDATE_BEDTIME, DEFAULT_TIME, DEFAULT_BEDTIME, VisibilityFilters } from './actions';
+import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, UPDATE_TIME, UPDATE_BEDTIME, UPDATE_BGCOLOR,UPDATE_SETTINGS } from './actions';
+import {DEFAULT_TIME, DEFAULT_SETTINGS, VisibilityFilters} from './actions';
 const {SHOW_ACTIVE } = VisibilityFilters;
-import timediff from 'timediff';
 
+
+function settings(state=DEFAULT_SETTINGS,action){
+	switch (action.type){
+		case UPDATE_SETTINGS :
+			if (!!action.settings['bedTime']){
+				state.bedTime = action.settings.bedTime	
+			} 
+			if(!!action.settings['bgColor']){
+				state.bgColor = action.settings.bgColor
+			}
+			return state
+		/*case UPDATE_BGCOLOR :
+			state.bgColor = action.bgColor
+			return state*/
+		default:
+			return state
+	}
+}
 
 function time(state=DEFAULT_TIME,action){
 	switch (action.type) {
 		case UPDATE_TIME:
-			let d = new Date()
-
-			let bedtime = new Date(d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' 23:30:30')
-			let diff = timediff(action.time,bedtime);
-
-			//console.log(diff);
-			return  {
-				hours : ("0"+diff.hours).slice(-2),
-				minutes: ("0"+diff.minutes).slice(-2),
-				seconds : ("0"+diff.seconds).slice(-2)
-			}
+			return action.time
 		default: 
 			return state;
 	}
@@ -73,18 +81,6 @@ function todos(state = [], action) {
   }
 }
 
-function settings(state=DEFAULT_BEDTIME, action){
-	switch (action.type) {
-		case UPDATE_BEDTIME:
-			state.bedTime = `${action.hours}:{action.minutes}:${action.seconds}`
-			//action.hours+':'+action.minutes+':'+action.seconds
-			//`${action.hours}:{action.minutes}:${action.seconds}`
-			return state
-		default:
-			return state
-	}
-}
-
 function burnoutApp(state={}, action){
 	settings = settings(state.settings, action);
 	time = time(state.time, action, state.settings);
@@ -96,7 +92,8 @@ function burnoutApp(state={}, action){
 const todoApp = combineReducers({
 	visibilityFilter,
 	todos,
-	time
+	time,
+	settings
 })
 
 export default todoApp

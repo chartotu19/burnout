@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { addTodo, completeTodo, updateTime, setVisibilityFilter, VisibilityFilters } from '../actions'
+import { addTodo, completeTodo, updateTime, updateSettings, setVisibilityFilter, VisibilityFilters, COLORS } from '../actions'
 
 import Timer from '../components/Timer'
 import Settings from '../components/Settings'
@@ -8,7 +8,7 @@ import TodoCount from '../components/TodoCount'
 import TodoList from '../components/TodoList'
 import AddTodo from '../components/AddTodo'
 import Footer from '../components/Footer'
-
+import timediff from 'timediff'
 
 
 class App extends Component {
@@ -24,9 +24,13 @@ class App extends Component {
 
     	return (
     	<div className="row">
-			<div className="col-sm-6 col-xs-6 b-row b-center ptop b-emphasis-30">
+			<div className="col-sm-6 col-xs-6 b-row b-center ptop ">
 				<Timer time={time}/>
-				<Settings />
+				<Settings 
+					colors={COLORS}
+					onSaveClick={ (settings) => 
+						dispatch(updateSettings(settings))
+				}/>
 			</div>
 			<div className="col-sm-6 col-xs-6 b-row b-center ptop ">
 				<TodoCount
@@ -86,11 +90,23 @@ function computeCount(todos){
 	return t.length
 }
 
+function getCountdownTime(currentTime,bedTime){
+	let d = new Date()
+	bedTime = new Date(d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+bedTime)
+	//currentTime = new Date(d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+' '+currentTime)
+	let diff = timediff(currentTime,bedTime)
+	return  {
+		hours : ("0"+diff.hours).slice(-2),
+		minutes: ("0"+diff.minutes).slice(-2),
+		seconds : ("0"+diff.seconds).slice(-2)
+	}
+}
+
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
   return {
-  	time : state.time,//state.timer,
+  	time : getCountdownTime(state.time, state.settings.bedTime),//state.timer,
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter,
     count : computeCount(state.todos)

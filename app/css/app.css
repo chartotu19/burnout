@@ -1,9 +1,11 @@
-.b-wrapper{
-    background:#AA3939;
+body{
+    background-color:#AA3939;
     color:white;
-    height:100%;
-    font-weight: 100;
-    font-size: 20px;
+    font-weight: 100;  
+    font-size: 20px;  
+}
+.b-wrapper{    
+    
 }
 
 .b-row{
@@ -37,6 +39,9 @@ text-align:center;
     border-radius: 3px;
 }
 
+input {
+    color: #AA3939;
+}
 .b-cta {
     color: #AA3939;
     background-color: white;    
@@ -60,6 +65,10 @@ text-align:center;
     padding: 20px;
 }
 
+.mt10{
+    margin-top:10px;
+}
+
 .mr10{
     margin-right: 10px;
 }
@@ -70,4 +79,33 @@ text-align:center;
 
 .mb10{
     margin-bottom: 10px;
+}
+
+.b-bgColor-container{
+    clear: both;
+    height: 100px;
+}
+
+.b-circle{
+    height: 40px;
+    clear: both;
+    width: 25%;
+    display: inline-block;
+    border: 1px solid #eee;
+}
+
+.b-gear-icon{
+    bottom: 0;
+    position: absolute;
+    left: 20;
+}
+
+.b-settings-pane{
+    background: #163939;
+    padding: 10px;
+    z-index: 100;
+    /* position: absolute; */
+    position: fixed;
+    bottom: 60px;
+    width: 50%;
 }
